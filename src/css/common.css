@@ -16,3 +16,36 @@ img {
   display: block;
   max-width: 100%;
 }
+.countdown-body {
+  height: 100vh;
+  background: linear-gradient(
+    183deg,
+    rgba(197, 200, 210, 0.06557005126269255) 0%,
+    rgba(98, 98, 105, 0.7238333565848214) 100%
+  );
+}
+#datetime-picker {
+  width: 240px;
+  height: 28px;
+}
+.countdown-body button {
+  height: 28px;
+}
+.timer {
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.value {
+  font-size: 40;
+}
+.label {
+  font-size: 16;
+  font-weight: 600;
+  text-transform: uppercase;
+}
