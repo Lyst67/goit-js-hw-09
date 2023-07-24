@@ -1,36 +1,31 @@
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
-const refs = {
-  firstDelayInput: document.querySelector('[name="delay"]'),
-  delayStepInput: document.querySelector('[name="step"]'),
-  amountInput: document.querySelector('[name="amount"]'),
-  submitForm: document.querySelector('.form'),
-};
+const form = document.querySelector('.form');
 
 let delay = null;
 let step = null;
-let amont = null;
+let amount = null;
 
-refs.firstDelayInput.addEventListener('input', onFirstDelay);
-refs.delayStepInput.addEventListener('input', onDelayStep);
-refs.amountInput.addEventListener('input', onAmount);
-refs.submitForm.addEventListener('submit', onSubmitForm);
+form.addEventListener('submit', onSubmitForm);
+form.elements.delay.addEventListener('input', onFirstDelay);
+form.elements.step.addEventListener('input', onDelayStep);
+form.elements.amount.addEventListener('input', onAmount);
 
-function onAmount() {
-  amont = refs.amountInput.value;
+function onAmount(evt) {
+  amount = evt.target.value;
 }
 
-function onDelayStep() {
-  step = Number(refs.delayStepInput.value);
+function onDelayStep(evt) {
+  step = Number(evt.target.value);
 }
 
-function onFirstDelay() {
-  delay = Number(refs.firstDelayInput.value);
+function onFirstDelay(evt) {
+  delay = Number(evt.target.value);
 }
 
-function onSubmitForm(event) {
-  event.preventDefault();
-  for (let i = 1; i <= amont; i += 1) {
+function onSubmitForm(evt) {
+  evt.preventDefault();
+  for (let i = 1; i <= amount; i += 1) {
     createPromise(i, delay)
       .then(({ position, delay }) => {
         Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
@@ -40,7 +35,7 @@ function onSubmitForm(event) {
       });
     delay = delay + step;
   }
-  delay = Number(refs.firstDelayInput.value);
+  delay = Number(form.elements.delay.value);
 }
 
 function createPromise(position, delay) {
