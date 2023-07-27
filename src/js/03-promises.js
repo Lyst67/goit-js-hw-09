@@ -7,24 +7,12 @@ let step = null;
 let amount = null;
 
 form.addEventListener('submit', onSubmitForm);
-form.elements.delay.addEventListener('input', onFirstDelay);
-form.elements.step.addEventListener('input', onDelayStep);
-form.elements.amount.addEventListener('input', onAmount);
-
-function onAmount(evt) {
-  amount = evt.target.value;
-}
-
-function onDelayStep(evt) {
-  step = Number(evt.target.value);
-}
-
-function onFirstDelay(evt) {
-  delay = Number(evt.target.value);
-}
 
 function onSubmitForm(evt) {
   evt.preventDefault();
+  delay = Number(evt.currentTarget.delay.value);
+  step = Number(evt.currentTarget.step.value);
+  amount = Number(evt.currentTarget.amount.value);
   for (let i = 1; i <= amount; i += 1) {
     createPromise(i, delay)
       .then(({ position, delay }) => {
